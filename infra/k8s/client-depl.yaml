@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+  labels:
+    app: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: mahmoudyahia/client-ticketing
+          env:
+            - name: ReCAPTCHA_SITEKEY
+              # value: 6LfGwe8oAAAAAFchFocTLNB_kjnxo0QJ0OBHK4Jl
+              value: 6LcvIT0rAAAAAPD8905MjN6U1-JDNaTu8YidxGkN
+            - name: NEXT_PUBLIC_PAYPAL_CLIENT_ID
+              # value: ATQD5CcRw9GXtLi2jtK6zyV6UltUTGvXFXcl82JvhJCmv-pIp5YvwwRsJ30vzEC5IUPDCyLYLRrPT1MB
+              value: AeLsvT4Y9JSyIx30EXCjhkCHG6gPcDAbmfEmv3MOGps5uwOtwAf6770dO9BNmBTRwE3gy2zGSY9Aei5R
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client-port
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

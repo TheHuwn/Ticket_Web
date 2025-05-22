@@ -1,0 +1,14 @@
+{
+  "/_app": "pages/_app.js",
+  "/auth/signin": "pages/auth/signin.js",
+  "/_document": "pages/_document.js",
+  "/auth/signout": "pages/auth/signout.js",
+  "/": "pages/index.js",
+  "/orders/[orderId]": "pages/orders/[orderId].js",
+  "/orders": "pages/orders.js",
+  "/auth/signup": "pages/auth/signup.js",
+  "/settings/me": "pages/settings/me.js",
+  "/tickets/new": "pages/tickets/new.js",
+  "/tickets/[ticketId]": "pages/tickets/[ticketId].js",
+  "/_error": "pages/_error.js"
+}

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: mahmoudyahia/auth
+          env:
+            - name: ReCAPTCHA_SECRETKEY
+              # value: 6LfGwe8oAAAAANAx57g_Z_XJg5S8pMdGKsPUGF_Y
+              value: 6LcvIT0rAAAAAHrdq5peF5jmjpBSu4TQyDz7mKl_
+            - name: CLIENT_ID_GOOGLE
+              valueFrom:
+                secretKeyRef:
+                  name: google-oauth-secret
+                  key: CLIENT_ID_GOOGLE
+            - name: CLIENT_SECRET_GOOGLE
+              valueFrom:
+                secretKeyRef:
+                  name: google-oauth-secret
+                  key: CLIENT_SECRET_GOOGLE
+            - name: MONGO_URI
+              value: "mongodb://auth-mongo-srv:27017/auth"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          ports:
+            - containerPort: 80
+
+#kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth-port
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
