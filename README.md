@@ -728,6 +728,3 @@ The Expiration Service enhances the application's architecture by handling order
 
 <hr>
 
-## Author
-
-- Mahmoud Yahia [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/mahmoud-yahia-882144219/)
